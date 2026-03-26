@@ -16,48 +16,34 @@ body{
   margin:0;
   font-family: Inter, Arial, sans-serif;
   color:var(--black);
+  background:#fff;
 }
 
-/* CONTENEDOR */
 .container{
   max-width:1100px;
   margin:auto;
   padding:40px 20px;
 }
 
-/* HERO */
+h1{font-size:40px;margin:0;}
+h2{font-size:28px;margin-bottom:10px;}
+p{color:var(--gray);line-height:1.6;}
+
 .hero{
   display:flex;
   flex-direction:column;
   gap:20px;
 }
 
-h1{
-  font-size:32px;
-  margin:0;
-}
-
 .statement{
-  font-size:24px;
+  font-size:28px;
   font-weight:600;
-  line-height:1.3;
 }
 
-/* SECCIONES */
 .section{
   margin-top:60px;
 }
 
-h2{
-  font-size:24px;
-}
-
-p{
-  color:var(--gray);
-  line-height:1.6;
-}
-
-/* GRID */
 .grid{
   display:flex;
   flex-direction:column;
@@ -69,7 +55,6 @@ p{
   padding-top:15px;
 }
 
-/* DARK */
 .dark{
   background:var(--black);
   color:white;
@@ -80,22 +65,21 @@ p{
   color:rgba(255,255,255,0.7);
 }
 
+.cta{
+  background:var(--blue);
+  color:white;
+  padding:15px 25px;
+  display:inline-block;
+  text-decoration:none;
+  margin-top:20px;
+}
+
 /* DESKTOP */
 @media(min-width:768px){
-
   .hero{
     flex-direction:row;
-    align-items:center;
     justify-content:space-between;
-  }
-
-  h1{
-    font-size:48px;
-  }
-
-  .statement{
-    font-size:34px;
-    max-width:500px;
+    align-items:center;
   }
 
   .grid{
@@ -105,6 +89,9 @@ p{
   .card{
     flex:1;
   }
+
+  h1{font-size:56px;}
+  .statement{font-size:34px;max-width:500px;}
 }
 </style>
 
@@ -112,6 +99,7 @@ p{
 
 <body>
 
+<!-- HERO -->
 <div class="container hero">
   <div>
     <h1>STRAX v1.0</h1>
@@ -124,26 +112,39 @@ p{
   </div>
 </div>
 
+<!-- PROBLEMA -->
 <div class="container section">
-  <h2>Modelo estructural</h2>
-  <p>Empresa = f(E, G, O, D, T)</p>
+  <h2>El problema estructural</h2>
+  <p>
+  La mayoría de empresas crecen sin una arquitectura definida.  
+  Esto genera dependencia del fundador, decisiones inconsistentes  
+  y pérdida económica silenciosa.
+  </p>
 </div>
 
+<!-- MODELO -->
+<div class="container section">
+  <h2>Modelo STRAX</h2>
+  <p>Empresa = f(Estrategia, Gobierno, Operación, Datos, Tecnología)</p>
+</div>
+
+<!-- MOTOR -->
 <div class="container grid">
   <div class="card">
     <strong>IIA</strong>
-    <p>Integridad arquitectónica</p>
+    <p>Mide la integridad estructural del sistema empresarial.</p>
   </div>
   <div class="card">
     <strong>IRA</strong>
-    <p>Riesgo estructural</p>
+    <p>Identifica el riesgo de colapso organizacional.</p>
   </div>
   <div class="card">
     <strong>MIE</strong>
-    <p>Impacto económico</p>
+    <p>Cuantifica el impacto económico de la mala arquitectura.</p>
   </div>
 </div>
 
+<!-- FRASE -->
 <div class="dark section">
   <div class="container">
     <div class="statement">
@@ -151,6 +152,27 @@ p{
       <span style="color:var(--blue)">Valida estructura.</span>
     </div>
   </div>
+</div>
+
+<!-- FASES -->
+<div class="container section">
+  <h2>Intervención estructural</h2>
+  <p>
+  STRAX no se ejecuta como consultoría.  
+  Se implementa como una intervención arquitectónica por fases.
+  </p>
+</div>
+
+<!-- CTA -->
+<div class="container section">
+  <h2>Diagnóstico estructural</h2>
+  <p>
+  Antes de implementar STRAX, se requiere validar si la empresa es apta para el sistema.
+  </p>
+
+  <a class="cta" href="#">
+    Agendar diagnóstico
+  </a>
 </div>
 
 </body>
