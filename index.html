@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>STRAX v1.0 - Documento institucional</title>
+<style>
+  :root{
+    --bg:#eef2f6;
+    --paper:#ffffff;
+    --ink:#0B0D10;
+    --muted:#6b7280;
+    --line:#dde3ea;
+    --blue:#1E5EFF;
+    --gold:#C9A227;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:Inter,Arial,Helvetica,sans-serif}
+  .wrap{padding:36px 0 72px;display:flex;flex-direction:column;gap:36px;align-items:center}
+  .page{
+    width:210mm; min-height:297mm; background:var(--paper); position:relative;
+    box-shadow:0 20px 60px rgba(11,13,16,.10); overflow:hidden;
+    padding:22mm 20mm 18mm 20mm;
+  }
+  .page.dark{background:var(--ink); color:#fff}
+  .page::before{
+    content:""; position:absolute; left:20mm; right:20mm; top:15mm; height:1px; background:var(--line);
+  }
+  .page.dark::before{background:rgba(255,255,255,.16)}
+  .eyebrow{
+    margin-top:6mm; font-size:10px; line-height:1; letter-spacing:.24em; text-transform:uppercase; color:var(--muted);
+  }
+  .page.dark .eyebrow{color:rgba(255,255,255,.58)}
+  .cover-grid{
+    display:grid; grid-template-columns:1.2fr .8fr; gap:16mm; align-items:end; margin-top:12mm;
+  }
+  .title{
+    font-size:60px; line-height:.92; letter-spacing:-.05em; font-weight:700; margin:0 0 8mm 0;
+  }
+  .subtitle{
+    font-size:16px; line-height:1.55; color:var(--muted); max-width:120mm;
+  }
+  .page.dark .subtitle{color:rgba(255,255,255,.74)}
+  .tagline{
+    margin-top:18mm; font-size:14px; line-height:1.4; letter-spacing:.18em; text-transform:uppercase; color:var(--muted);
+  }
+  .hero-box{
+    border:1px solid var(--line); border-radius:0; height:118mm; display:flex; align-items:center; justify-content:center;
+  }
+  .page.dark .hero-box{border-color:rgba(255,255,255,.12)}
+  .statement{
+    margin-top:54mm; max-width:132mm; font-size:36px; line-height:1.04; letter-spacing:-.04em; font-weight:650;
+  }
+  .statement .blue{color:var(--blue)}
+  .statement .soft{color:var(--muted); font-weight:500}
+  .page.dark .statement .soft{color:rgba(255,255,255,.62)}
+  .section-kicker{
+    font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--muted); margin:18mm 0 9mm;
+  }
+  .lede{
+    font-size:31px; line-height:1.08; letter-spacing:-.04em; max-width:140mm; margin:0 0 12mm;
+  }
+  .copy{
+    font-size:16px; line-height:1.7; max-width:120mm; color:#1d232b;
+  }
+  .grid-2{display:grid; grid-template-columns:1fr 1fr; gap:16mm}
+  .grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:10mm}
+  .metric{
+    border-top:1px solid var(--line); padding-top:7mm;
+  }
+  .metric .num{font-size:44px; line-height:1; letter-spacing:-.05em; font-weight:700}
+  .metric .label{font-size:11px; line-height:1.4; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); margin-top:4mm}
+  .formula{
+    font-size:48px; line-height:1; letter-spacing:-.06em; margin-top:46mm; font-weight:650;
+  }
+  .formula-sub{
+    margin-top:8mm; font-size:15px; color:var(--muted); letter-spacing:.10em; text-transform:uppercase;
+  }
+  .method{
+    margin-top:10mm; border-top:1px solid var(--line);
+  }
+  .row{
+    display:grid; grid-template-columns:16mm 1fr 1.2fr; gap:9mm; align-items:start;
+    padding:7mm 0; border-bottom:1px solid var(--line);
+  }
+  .phase{font-size:13px; color:var(--muted); letter-spacing:.14em; text-transform:uppercase}
+  .row h4{margin:0; font-size:18px; line-height:1.15}
+  .row p{margin:0; font-size:14px; line-height:1.6; color:#27303a}
+  .thresholds{
+    display:grid; grid-template-columns:repeat(5,1fr); gap:6mm; margin-top:22mm;
+  }
+  .threshold{
+    border-top:1px solid var(--line); padding-top:7mm; text-align:left;
+  }
+  .threshold .value{font-size:42px; line-height:1; font-weight:700; letter-spacing:-.05em}
+  .threshold .label{margin-top:3mm; font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted)}
+  .case{
+    border-top:1px solid var(--line); padding-top:7mm;
+  }
+  .case-title{font-size:12px; letter-spacing:.20em; text-transform:uppercase; color:var(--muted); margin-bottom:6mm}
+  .case-line{font-size:22px; line-height:1.18; letter-spacing:-.03em; margin-bottom:4mm}
+  .case-copy{font-size:14px; line-height:1.65; color:#27303a}
+  .footer-mark{
+    position:absolute; left:20mm; right:20mm; bottom:14mm; display:flex; justify-content:space-between; align-items:center;
+    font-size:11px; color:var(--muted); letter-spacing:.10em; text-transform:uppercase;
+  }
+  .dark .footer-mark{color:rgba(255,255,255,.55)}
+  .cert-grid{
+    display:grid; grid-template-columns:1fr 1fr 1fr; gap:10mm; margin-top:20mm;
+  }
+  .cert{
+    border:1px solid var(--line); padding:8mm;
+  }
+  .cert h4{margin:0 0 6mm; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted)}
+  .cert .level{font-size:34px; line-height:1; letter-spacing:-.05em; font-weight:700}
+  .cert p{margin:6mm 0 0; font-size:14px; line-height:1.6; color:#27303a}
+  @media print{
+    body{background:white}
+    .wrap{padding:0; gap:0}
+    .page{box-shadow:none; margin:0; page-break-after:always}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <section class="page">
+    <div class="eyebrow">STRAX v1.0 · Documento institucional</div>
+    <div class="cover-grid">
+      <div>
+        <h1 class="title">STRAX<br/>v1.0</h1>
+        <div class="subtitle">
+          Método de arquitectura estructural y ejecución para diagnosticar, rediseñar y gobernar sistemas empresariales antes de implementar cambios.
+        </div>
+        <div class="tagline">Arquitectura estructural certificable</div>
+      </div>
+      <div class="hero-box">
+        <svg width="260" height="260" viewBox="0 0 260 260" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Isotipo STRAX">
+          <polygon points="130,18 232,90 193,212 67,212 28,90" stroke="#0B0D10" stroke-width="14" fill="none"/>
+          <polygon points="130,49 203,101 175,188 85,188 57,101" stroke="#1E5EFF" stroke-width="12" fill="none"/>
+          <polygon points="130,84 171,113 155,163 105,163 89,113" stroke="#0B0D10" stroke-width="10" fill="none"/>
+        </svg>
+      </div>
+    </div>
+    <div class="footer-mark"><span>Lucas Valencia</span><span>Fundador — Método STRAX</span></div>
+  </section>
+
+  <section class="page dark">
+    <div class="eyebrow">Declaración</div>
+    <div class="statement">
+      La mayoría de empresas no falla por falta de crecimiento.<br/><span class="blue">Falla porque está mal diseñada.</span>
+    </div>
+    <div class="footer-mark"><span>STRAX</span><span>Arquitectura estructural certificable</span></div>
+  </section>
+
+  <section class="page">
+    <div class="section-kicker">Declaración de origen</div>
+    <div class="lede">STRAX nace como un estándar para rediseñar empresas desde su arquitectura estructural antes de ejecutar transformación tecnológica, operativa o estratégica.</div>
+    <div class="copy">
+      Su propósito es restablecer coherencia entre <strong>estrategia, gobierno, operación, datos e infraestructura tecnológica</strong> antes de implementar cambios. No es consultoría. No es software. No es agencia. Es un marco institucional de evaluación arquitectónica empresarial.
+    </div>
+
+    <div class="grid-3" style="margin-top:18mm">
+      <div class="metric"><div class="num">5</div><div class="label">Capas estructurales</div></div>
+      <div class="metric"><div class="num">4</div><div class="label">Índices y modelos base</div></div>
+      <div class="metric"><div class="num">1.0</div><div class="label">Versión oficial congelada</div></div>
+    </div>
+
+    <div class="footer-mark"><span>Fundamento institucional</span><span>Versión oficial</span></div>
+  </section>
+
+  <section class="page">
+    <div class="section-kicker">Modelo estructural</div>
+    <div class="formula">Empresa = f(E, G, O, D, T)</div>
+    <div class="formula-sub">Estrategia · Gobierno · Operación · Datos · Tecnología</div>
+
+    <div class="grid-2" style="margin-top:22mm">
+      <div class="copy">
+        Cada capa se mide en escala 0-100 mediante subvariables estructuradas. El objetivo no es opinar sobre la empresa; el objetivo es <strong>volverla medible, trazable y rediseñable</strong>.
+      </div>
+      <div class="copy">
+        La integridad arquitectónica evita compensación artificial entre capas. Un sistema no es tan fuerte como su promedio; es tan fuerte como <strong>su punto estructural más débil</strong>.
+      </div>
+    </div>
+
+    <div class="footer-mark"><span>Modelo de capas</span><span>E · G · O · D · T</span></div>
+  </section>
+
+  <section class="page">
+    <div class="section-kicker">Sistema de medición</div>
+    <div class="lede">STRAX convierte la arquitectura empresarial en un sistema medible, auditable y trazable.</div>
+
+    <div class="grid-3" style="margin-top:16mm">
+      <div class="metric">
+        <div class="num">IIA</div>
+        <div class="label">Integridad arquitectónica</div>
+      </div>
+      <div class="metric">
+        <div class="num">IRA</div>
+        <div class="label">Riesgo arquitectónico</div>
+      </div>
+      <div class="metric">
+        <div class="num">MIE</div>
+        <div class="label">Impacto económico</div>
+      </div>
+    </div>
+
+    <div class="copy" style="margin-top:18mm;max-width:145mm">
+      El núcleo algorítmico oficial integra normalización por capas, penalización estructural, costo estructural anual, simuladores dinámicos y arquitectura de datos versionada para cada evaluación.
+    </div>
+
+    <div class="footer-mark"><span>Núcleo algorítmico congelado</span><span>IIA · IRA · MIE</span></div>
+  </section>
+
+  <section class="page">
+    <div class="section-kicker">Estructura del método</div>
+    <div class="lede">No todas las empresas califican para avanzar.</div>
+
+    <div class="method">
+      <div class="row">
+        <div class="phase">F0</div>
+        <div><h4>Evaluación</h4></div>
+        <div><p>Determina preparación arquitectónica y viabilidad inicial del proceso.</p></div>
+      </div>
+      <div class="row">
+        <div class="phase">F0.5</div>
+        <div><h4>Recalibración</h4></div>
+        <div><p>Interviene cuando el founder o la estructura no cumplen criterios mínimos.</p></div>
+      </div>
+      <div class="row">
+        <div class="phase">F1</div>
+        <div><h4>Radiografía sistémica</h4></div>
+        <div><p>Mapea operación, datos, gobierno y costo del desorden estructural.</p></div>
+      </div>
+      <div class="row">
+        <div class="phase">F2</div>
+        <div><h4>Arquitectura objetivo</h4></div>
+        <div><p>Diseña el modelo futuro de estrategia, gobierno, operación, datos y tecnología.</p></div>
+      </div>
+      <div class="row">
+        <div class="phase">F3</div>
+        <div><h4>Plan de integración y escala</h4></div>
+        <div><p>Convierte la arquitectura objetivo en un plan ejecutable, priorizado y financieramente viable.</p></div>
+      </div>
+      <div class="row">
+        <div class="phase">F4</div>
+        <div><h4>Ejecución supervisada</h4></div>
+        <div><p>Valida coherencia, deriva y severidad arquitectónica durante la implementación.</p></div>
+      </div>
+    </div>
+
+    <div class="footer-mark"><span>Fases oficiales</span><span>0 · 0.5 · 1 · 2 · 3 · 4</span></div>
+  </section>
+
+  <section class="page dark">
+    <div class="eyebrow">Arquitectura objetivo</div>
+    <div class="statement">STRAX no valida intención.<br/><span class="blue">Valida estructura.</span></div>
+
+    <div class="thresholds" style="margin-top:24mm">
+      <div class="threshold"><div class="value">85</div><div class="label">Estrategia</div></div>
+      <div class="threshold"><div class="value">85</div><div class="label">Gobierno</div></div>
+      <div class="threshold"><div class="value">85</div><div class="label">Operación</div></div>
+      <div class="threshold"><div class="value">85</div><div class="label">Datos</div></div>
+      <div class="threshold"><div class="value">85</div><div class="label">Tecnología</div></div>
+    </div>
+
+    <div class="footer-mark"><span>Umbrales estructurales</span><span>Arquitectura objetivo congelada</span></div>
+  </section>
+
+  <section class="page">
+    <div class="section-kicker">STRAX Engine</div>
+    <div class="lede">Sin Engine oficial no existe certificación válida.</div>
+
+    <div class="grid-2" style="margin-top:14mm">
+      <div class="copy">
+        El motor opera como microservicio independiente, API-first, multi-tenant y desacoplado de cualquier CRM o ERP. El núcleo matemático es hardcodeado, versionado y protegido por control multifirma.
+      </div>
+      <div class="copy">
+        Cada evaluación genera hash del modelo, hash de pesos y hash del dataset normalizado. Toda certificación debe incluir firma digital, timestamp UTC, ID único y versión exacta del modelo.
+      </div>
+    </div>
+
+    <div class="grid-3" style="margin-top:18mm">
+      <div class="metric"><div class="num">HASH</div><div class="label">Por evaluación</div></div>
+      <div class="metric"><div class="num">UTC</div><div class="label">Timestamp obligatorio</div></div>
+      <div class="metric"><div class="num">API</div><div class="label">Verificación pública</div></div>
+    </div>
+
+    <div class="footer-mark"><span>Infraestructura certificable</span><span>Engine v1.0.2</span></div>
+  </section>
+
+  <section class="page">
+    <div class="section-kicker">Régimen de certificación</div>
+    <div class="lede">La certificación no es declarativa. Es matemática y verificable.</div>
+
+    <div class="cert-grid">
+      <div class="cert">
+        <h4>Nivel</h4>
+        <div class="level" style="color:var(--gold)">Gold</div>
+        <p>IIA &gt;= 80<br/>IRA &lt;= 20</p>
+      </div>
+      <div class="cert">
+        <h4>Nivel</h4>
+        <div class="level">Silver</div>
+        <p>IIA entre 65 y 79<br/>IRA &lt;= 35</p>
+      </div>
+      <div class="cert">
+        <h4>Nivel</h4>
+        <div class="level">Estabilización</div>
+        <p>IIA entre 50 y 64<br/>Monitoreo activo requerido</p>
+      </div>
+    </div>
+
+    <div class="copy" style="margin-top:16mm;max-width:145mm">
+      La vigencia depende de monitoreo STRAX LIVE activo, dataset validado, Blueprint vigente y cumplimiento continuo de umbrales estructurales.
+    </div>
+
+    <div class="footer-mark"><span>Certificación oficial</span><span>Gold · Silver · Estabilización</span></div>
+  </section>
+
+  <section class="page">
+    <div class="section-kicker">Modelo económico</div>
+    <div class="lede">STRAX no se vende como una hora de consultoría. Se estructura como intervención arquitectónica.</div>
+
+    <div class="method">
+      <div class="row">
+        <div class="phase">01</div>
+        <div><h4>ENTRY</h4></div>
+        <div><p>Fase 0 · 1 semana · USD 2.000 - 3.000</p></div>
+      </div>
+      <div class="row">
+        <div class="phase">02</div>
+        <div><h4>CORE</h4></div>
+        <div><p>Fase 0 + 1 · 3 semanas · USD 7.000 - 10.000</p></div>
+      </div>
+      <div class="row">
+        <div class="phase">03</div>
+        <div><h4>MASTER</h4></div>
+        <div><p>Fase 0 + 1 + 2 · 6 semanas · USD 14.000 - 18.000</p></div>
+      </div>
+      <div class="row">
+        <div class="phase">04</div>
+        <div><h4>ARCHITECT</h4></div>
+        <div><p>Fase 0 - 4 completo · 3-6 meses · USD 20.000 - 35.000</p></div>
+      </div>
+    </div>
+
+    <div class="footer-mark"><span>Estructura oficial de precios</span><span>Modelo híbrido</span></div>
+  </section>
+
+  <section class="page">
+    <div class="section-kicker">Evidencia estructural</div>
+    <div class="lede">Distintos síntomas. Mismo origen.</div>
+
+    <div class="grid-2" style="margin-top:12mm">
+      <div class="case">
+        <div class="case-title">ENTESCO</div>
+        <div class="case-line">El problema no era operativo. Era estructural.</div>
+        <div class="case-copy">Fragmentación entre operación y tecnología, baja trazabilidad en decisiones y dependencia operativa crítica.</div>
+      </div>
+      <div class="case">
+        <div class="case-title">LAN SECURITY</div>
+        <div class="case-line">La seguridad no fallaba. Fallaba la arquitectura.</div>
+        <div class="case-copy">Modelo reactivo, desconexión entre datos y operación, y límite claro de escalabilidad.</div>
+      </div>
+      <div class="case">
+        <div class="case-title">CM ESTRUCTURAS</div>
+        <div class="case-line">El crecimiento estaba bloqueado por diseño.</div>
+        <div class="case-copy">Complejidad operativa no estandarizada, trazabilidad insuficiente de componentes y fricción entre diseño y ejecución.</div>
+      </div>
+      <div class="case">
+        <div class="case-title">Patrón</div>
+        <div class="case-line">Lo visible cambia. La causa real no.</div>
+        <div class="case-copy">Cuando la empresa se degrada, la conversación correcta no es “qué área falló”, sino “qué arquitectura permitió esa falla”.</div>
+      </div>
+    </div>
+
+    <div class="footer-mark"><span>Casos de referencia</span><span>Evidencia estructural</span></div>
+  </section>
+
+  <section class="page dark">
+    <div class="eyebrow">Cierre</div>
+    <div class="statement">
+      Puedes seguir operando como estás.<br/><span class="blue">O puedes entender cuánto te está costando.</span>
+    </div>
+    <div class="subtitle" style="margin-top:16mm;max-width:115mm">
+      La pregunta no es si necesitas claridad estructural. La pregunta es cuánto tiempo más vas a financiar el desorden.
+    </div>
+    <div class="footer-mark"><span>Lucas Valencia</span><span>Fundador — Método STRAX</span></div>
+  </section>
+
+</div>
+</body>
+</html>
