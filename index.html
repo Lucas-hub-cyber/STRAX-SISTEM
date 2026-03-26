@@ -16,7 +16,6 @@ body{
   margin:0;
   font-family: Inter, Arial, sans-serif;
   color:var(--black);
-  background:#fff;
 }
 
 .container{
@@ -25,9 +24,9 @@ body{
   padding:40px 20px;
 }
 
-h1{font-size:40px;margin:0;}
-h2{font-size:28px;margin-bottom:10px;}
-p{color:var(--gray);line-height:1.6;}
+h1{font-size:48px;}
+h2{font-size:28px;}
+p{color:var(--gray); line-height:1.6;}
 
 .hero{
   display:flex;
@@ -36,13 +35,11 @@ p{color:var(--gray);line-height:1.6;}
 }
 
 .statement{
-  font-size:28px;
+  font-size:32px;
   font-weight:600;
 }
 
-.section{
-  margin-top:60px;
-}
+.section{margin-top:60px;}
 
 .grid{
   display:flex;
@@ -55,15 +52,61 @@ p{color:var(--gray);line-height:1.6;}
   padding-top:15px;
 }
 
+/* RADAR */
+.radar{
+  position:relative;
+  width:300px;
+  height:300px;
+  margin:auto;
+}
+
+.circle{
+  position:absolute;
+  border:1px solid #ddd;
+  border-radius:50%;
+  width:100%;
+  height:100%;
+}
+
+.circle:nth-child(2){
+  width:70%; height:70%; top:15%; left:15%;
+}
+
+.circle:nth-child(3){
+  width:40%; height:40%; top:30%; left:30%;
+}
+
+.axis{
+  position:absolute;
+  width:1px;
+  height:100%;
+  background:#ddd;
+  left:50%;
+}
+
+.axis-2{ transform:rotate(72deg);}
+.axis-3{ transform:rotate(144deg);}
+.axis-4{ transform:rotate(216deg);}
+.axis-5{ transform:rotate(288deg);}
+
+.label{
+  position:absolute;
+  font-size:12px;
+}
+
+.l1{ top:-10px; left:50%; transform:translateX(-50%);}
+.l2{ right:-40px; top:40%;}
+.l3{ bottom:-20px; left:50%; transform:translateX(-50%);}
+.l4{ left:-40px; top:40%;}
+.l5{ top:40%; left:50%; transform:translate(-50%,-120%);}
+
 .dark{
   background:var(--black);
   color:white;
   padding:60px 20px;
 }
 
-.dark p{
-  color:rgba(255,255,255,0.7);
-}
+.dark p{color:rgba(255,255,255,0.7);}
 
 .cta{
   background:var(--blue);
@@ -74,24 +117,12 @@ p{color:var(--gray);line-height:1.6;}
   margin-top:20px;
 }
 
-/* DESKTOP */
+/* RESPONSIVE */
 @media(min-width:768px){
-  .hero{
-    flex-direction:row;
-    justify-content:space-between;
-    align-items:center;
-  }
-
-  .grid{
-    flex-direction:row;
-  }
-
-  .card{
-    flex:1;
-  }
-
-  h1{font-size:56px;}
-  .statement{font-size:34px;max-width:500px;}
+  .hero{flex-direction:row; justify-content:space-between;}
+  .grid{flex-direction:row;}
+  .card{flex:1;}
+  .radar{width:400px;height:400px;}
 }
 </style>
 
@@ -107,72 +138,98 @@ p{color:var(--gray);line-height:1.6;}
   </div>
 
   <div class="statement">
-    Las empresas no fallan por falta de crecimiento.<br>
-    <span style="color:var(--blue)">Fallan porque están mal diseñadas.</span>
+    Las empresas no fallan por crecimiento.<br>
+    <span style="color:var(--blue)">Fallan por diseño.</span>
   </div>
 </div>
 
 <!-- PROBLEMA -->
 <div class="container section">
-  <h2>El problema estructural</h2>
-  <p>
-  La mayoría de empresas crecen sin una arquitectura definida.  
-  Esto genera dependencia del fundador, decisiones inconsistentes  
-  y pérdida económica silenciosa.
-  </p>
+<h2>El problema estructural</h2>
+<p>
+Las empresas crecen sin arquitectura.  
+Esto genera dependencia del fundador, baja escalabilidad  
+y pérdida económica constante.
+</p>
 </div>
 
 <!-- MODELO -->
 <div class="container section">
-  <h2>Modelo STRAX</h2>
-  <p>Empresa = f(Estrategia, Gobierno, Operación, Datos, Tecnología)</p>
+<h2>Modelo STRAX</h2>
+<p>Empresa = f(Estrategia, Gobierno, Operación, Datos, Tecnología)</p>
+</div>
+
+<!-- RADAR -->
+<div class="container section">
+<div class="radar">
+  <div class="circle"></div>
+  <div class="circle"></div>
+  <div class="circle"></div>
+
+  <div class="axis"></div>
+  <div class="axis axis-2"></div>
+  <div class="axis axis-3"></div>
+  <div class="axis axis-4"></div>
+  <div class="axis axis-5"></div>
+
+  <div class="label l1">Estrategia</div>
+  <div class="label l2">Gobierno</div>
+  <div class="label l3">Operación</div>
+  <div class="label l4">Datos</div>
+  <div class="label l5">Tecnología</div>
+</div>
 </div>
 
 <!-- MOTOR -->
 <div class="container grid">
-  <div class="card">
-    <strong>IIA</strong>
-    <p>Mide la integridad estructural del sistema empresarial.</p>
-  </div>
-  <div class="card">
-    <strong>IRA</strong>
-    <p>Identifica el riesgo de colapso organizacional.</p>
-  </div>
-  <div class="card">
-    <strong>MIE</strong>
-    <p>Cuantifica el impacto económico de la mala arquitectura.</p>
-  </div>
+<div class="card">
+<strong>IIA</strong>
+<p>Integridad estructural</p>
+</div>
+<div class="card">
+<strong>IRA</strong>
+<p>Riesgo estructural</p>
+</div>
+<div class="card">
+<strong>MIE</strong>
+<p>Impacto económico</p>
+</div>
 </div>
 
 <!-- FRASE -->
 <div class="dark section">
-  <div class="container">
-    <div class="statement">
-      STRAX no valida intención.<br>
-      <span style="color:var(--blue)">Valida estructura.</span>
-    </div>
-  </div>
+<div class="container">
+<div class="statement">
+STRAX no valida intención.<br>
+<span style="color:var(--blue)">Valida estructura.</span>
+</div>
+</div>
 </div>
 
 <!-- FASES -->
 <div class="container section">
-  <h2>Intervención estructural</h2>
-  <p>
-  STRAX no se ejecuta como consultoría.  
-  Se implementa como una intervención arquitectónica por fases.
-  </p>
+<h2>Fases STRAX</h2>
+<p>Fase 0: Diagnóstico estructural</p>
+<p>Fase 1: Alineación estructural</p>
+<p>Fase 2: Arquitectura organizacional</p>
+<p>Fase 3: Sistema de ejecución</p>
+<p>Fase 4: Certificación</p>
+</div>
+
+<!-- CERTIFICACION -->
+<div class="container section">
+<h2>Certificación</h2>
+<p>Gold, Silver y Estabilización según nivel estructural.</p>
 </div>
 
 <!-- CTA -->
 <div class="container section">
-  <h2>Diagnóstico estructural</h2>
-  <p>
-  Antes de implementar STRAX, se requiere validar si la empresa es apta para el sistema.
-  </p>
+<h2>Diagnóstico estructural</h2>
+<p>En una semana puedes entender cuánto estás perdiendo por desorden interno.</p>
 
-  <a class="cta" href="#">
-    Agendar diagnóstico
-  </a>
+<a class="cta" href="#">
+Agendar diagnóstico
+</a>
 </div>
 
 </body>
