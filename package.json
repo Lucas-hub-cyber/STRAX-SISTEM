@@ -1,0 +1,12 @@
+{
+  "name": "strax-system",
+  "version": "1.0.0",
+  "description": "Sistema central STRAX con engine desacoplado, API y frontend preservado.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "start:api": "node server.js",
+    "start:strax": "node server.js"
+  },
+  "license": "UNLICENSED"
+}
