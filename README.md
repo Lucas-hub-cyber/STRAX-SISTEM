@@ -10,6 +10,16 @@ El backend STRAX corre por defecto en `http://localhost:3001`.
 npm run start:strax
 ```
 
+## Variables de entorno
+
+La API key de OpenAI debe ir en un archivo local `.env` en la raiz del proyecto, al lado de `server.js`.
+
+```env
+OPENAI_API_KEY=tu_api_key_aqui
+```
+
+No pongas esta clave en `index.html`, `documento.html` ni en ningun archivo del frontend. El archivo `.env` queda ignorado por Git para evitar subir secretos al repositorio.
+
 ## Endpoints
 
 - `GET /`
