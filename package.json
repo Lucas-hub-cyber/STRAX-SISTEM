@@ -8,5 +8,8 @@
     "start:api": "node server.js",
     "start:strax": "node server.js"
   },
-  "license": "UNLICENSED"
+  "license": "UNLICENSED",
+  "dependencies": {
+    "openai": "^6.35.0"
+  }
 }

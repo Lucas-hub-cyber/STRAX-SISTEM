@@ -15,7 +15,8 @@ npm run start:strax
 La API key de OpenAI debe ir en un archivo local `.env` en la raiz del proyecto, al lado de `server.js`.
 
 ```env
-OPENAI_API_KEY=tu_api_key_aqui
+OPENAI_API_KEY=your_openai_api_key_here
+PORT=3001
 ```
 
 No pongas esta clave en `index.html`, `documento.html` ni en ningun archivo del frontend. El archivo `.env` queda ignorado por Git para evitar subir secretos al repositorio.

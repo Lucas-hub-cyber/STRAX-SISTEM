@@ -1,5 +1,11 @@
 const http = require('http');
+const fs = require('fs');
+const { handleAnalyze } = require('./src/api/analyzeRoute');
 const { handleEvaluate } = require('./src/api/evaluate');
+
+if (fs.existsSync('.env')) {
+  process.loadEnvFile('.env');
+}
 
 const PORT = Number(process.env.PORT || 3001);
 const ALLOWED_ORIGIN = 'http://localhost:3000';
@@ -31,6 +37,11 @@ const server = http.createServer((request, response) => {
     return;
   }
 
+  if (request.method === 'POST' && requestUrl.pathname === '/analyze') {
+    handleAnalyze(request, response);
+    return;
+  }
+
   if (request.method === 'GET' && requestUrl.pathname === '/') {
     sendJson(response, 200, {
       status: 'ok',
@@ -38,6 +49,7 @@ const server = http.createServer((request, response) => {
       mode: 'backend-only',
       endpoints: {
         health: '/health',
+        analyze: '/analyze',
         evaluate: '/evaluate'
       },
       landing: 'http://localhost:3000'
@@ -56,7 +68,7 @@ const server = http.createServer((request, response) => {
 
   sendJson(response, 404, {
     error: 'Not found',
-    message: 'Usa GET /, GET /health o POST /evaluate. La interfaz principal vive en http://localhost:3000'
+    message: 'Usa GET /, GET /health, POST /analyze o POST /evaluate. La interfaz principal vive en http://localhost:3000'
   });
 });
 
